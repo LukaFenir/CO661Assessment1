@@ -12,14 +12,14 @@ public class TestSuite {
 		describe("Test file creation and listing");
 		testAvailableFiles();
 
-		/*
+		
 		describe("Test single threaded open/read/write/close");
 		testSingleThread();
 
 		describe("Test multithreading locking");
 		testMultiThreadRead();
 		testMultiThread1();
-		testMultiThread2();*/
+		testMultiThread2();
 		
 	}
 

@@ -1,6 +1,5 @@
 import java.util.Optional;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Client implements Runnable{
@@ -36,10 +35,12 @@ public class Client implements Runnable{
 			//content = File.read
 			//if write: call File.write(content + clientName)
 			String fileContents = openFile.get().read(); //how to get File out of Optional
-			System.out.println(clientName + " reading file " + fileName + ": " + fileContents);
+
 			if(mode == Mode.READWRITEABLE){
 				openFile.get().write(fileContents + clientName);
 				System.out.println(clientName + " writing to file " + fileName + ": " + openFile.get().read());
+			} else if(mode == Mode.READABLE) {
+				System.out.println(clientName + " reading file " + fileName + ": " + fileContents);				
 			}
 			//close save file
 			fileServer.close(openFile.get());
@@ -57,7 +58,7 @@ public class Client implements Runnable{
 		fileServer.create("test1", "I like bananas and stuff");
 		//fileServer.create("one1351", "Bananas and stuff like me");
 		//Make a for loop?
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 2; i++) {
 			Client client = new Client("Client" + i, fileServer);
 			Thread thread = new Thread(client);
 			thread.start();
